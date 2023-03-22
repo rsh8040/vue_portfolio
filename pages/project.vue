@@ -42,7 +42,7 @@
             </div>
         </div>
         
-        <div class="bg-green-400 p-4">
+        <div class="mb-12 bg-green-400 p-4">
             <div class="grid grid-cols-2 grid-rows-2 gap-4">
                 <div class="bg-red-300">프로젝트5 제목</div>
                 <div class="bg-red-300 row-span-2">프로젝트5 대표이미지</div>
@@ -50,4 +50,10 @@
             </div>
         </div>
     </div>
+    
+    <footer>
+        <div class="lg:container mx-auto bg-gray-600" style="height: 150px;">
+            <h1>푸터</h1>
+        </div>
+    </footer>
 </template>

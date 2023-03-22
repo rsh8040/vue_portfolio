@@ -30,9 +30,15 @@
             <div class="mb-4 bg-gray-400" style="height: 400px;">서브이미지</div>
         </div>
         
-        <div class="flex justify-between">
+        <div class="flex justify-between mb-12">
             <div class="bg-indigo-400" style="height: 60px; width:100px;">이전페이지</div>
             <div class="bg-indigo-400" style="height: 60px; width:100px;">다음페이지</div>
         </div>
     </div>
+
+    <footer>
+        <div class="lg:container mx-auto bg-gray-600" style="height: 150px;">
+            <h1>푸터</h1>
+        </div>
+    </footer>
 </template>
