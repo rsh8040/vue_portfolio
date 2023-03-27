@@ -11,43 +11,53 @@
     
     <div class="lg:container mx-auto px-4 py-2 bg-red-400">
         <div class="mb-4 bg-green-400 p-4">
-            <div class="grid grid-cols-2 grid-rows-2 gap-4">
-                <div class="bg-red-300">프로젝트1 제목</div>
-                <div class="bg-red-300 row-span-2">프로젝트1 대표이미지</div>
-                <div class="bg-red-300" style="height: 60px;">프로젝트1 중요스택요약</div>
-            </div>
+            <a href="/detail">
+                <div class="grid grid-cols-2 grid-rows-2 gap-4">
+                    <div class="bg-red-300">프로젝트1 제목</div>
+                    <div class="bg-red-300 row-span-2">프로젝트1 대표이미지</div>
+                    <div class="bg-red-300" style="height: 60px;">프로젝트1 중요스택요약</div>
+                </div>
+            </a>
         </div>
         
         <div class="mb-4 bg-green-400 p-4">
-            <div class="grid grid-cols-2 grid-rows-2 gap-4">
-                <div class="bg-red-300">프로젝트2 제목</div>
-                <div class="bg-red-300 row-span-2">프로젝트2 대표이미지</div>
-                <div class="bg-red-300" style="height: 60px;">프로젝트2 중요스택요약</div>
-            </div>
+            <a href="/detail2">
+                <div class="grid grid-cols-2 grid-rows-2 gap-4">
+                    <div class="bg-red-300">프로젝트2 제목</div>
+                    <div class="bg-red-300 row-span-2">프로젝트2 대표이미지</div>
+                    <div class="bg-red-300" style="height: 60px;">프로젝트2 중요스택요약</div>
+                </div>
+            </a>
         </div>
         
         <div class="mb-4 bg-green-400 p-4">
-            <div class="grid grid-cols-2 grid-rows-2 gap-4">
-                <div class="bg-red-300">프로젝트3 제목</div>
-                <div class="bg-red-300 row-span-2">프로젝트3 대표이미지</div>
-                <div class="bg-red-300" style="height: 60px;">프로젝트3 중요스택요약</div>
-            </div>
+            <a href="/detail3">
+                <div class="grid grid-cols-2 grid-rows-2 gap-4">
+                    <div class="bg-red-300">프로젝트3 제목</div>
+                    <div class="bg-red-300 row-span-2">프로젝트3 대표이미지</div>
+                    <div class="bg-red-300" style="height: 60px;">프로젝트3 중요스택요약</div>
+                </div>
+            </a>
         </div>
         
         <div class="mb-4 bg-green-400 p-4">
-            <div class="grid grid-cols-2 grid-rows-2 gap-4">
-                <div class="bg-red-300">프로젝트4 제목</div>
-                <div class="bg-red-300 row-span-2">프로젝트4 대표이미지</div>
-                <div class="bg-red-300" style="height: 60px;">프로젝트4 중요스택요약</div>
-            </div>
+            <a href="/detail4">
+                <div class="grid grid-cols-2 grid-rows-2 gap-4">
+                    <div class="bg-red-300">프로젝트4 제목</div>
+                    <div class="bg-red-300 row-span-2">프로젝트4 대표이미지</div>
+                    <div class="bg-red-300" style="height: 60px;">프로젝트4 중요스택요약</div>
+                </div>
+            </a>
         </div>
         
         <div class="mb-12 bg-green-400 p-4">
-            <div class="grid grid-cols-2 grid-rows-2 gap-4">
-                <div class="bg-red-300">프로젝트5 제목</div>
-                <div class="bg-red-300 row-span-2">프로젝트5 대표이미지</div>
-                <div class="bg-red-300" style="height: 60px;">프로젝트5 중요스택요약</div>
-            </div>
+            <a href="/detail5">
+                <div class="grid grid-cols-2 grid-rows-2 gap-4">
+                    <div class="bg-red-300">프로젝트5 제목</div>
+                    <div class="bg-red-300 row-span-2">프로젝트5 대표이미지</div>
+                    <div class="bg-red-300" style="height: 60px;">프로젝트5 중요스택요약</div>
+                </div>
+            </a>
         </div>
     </div>
     

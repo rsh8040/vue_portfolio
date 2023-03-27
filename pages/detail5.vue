@@ -15,8 +15,8 @@
         </div>
         
         <div class="grid grid-cols-2 grid-rows-2 gap-4 mb-12">
-            <div class="bg-blue-400">프로젝트 기간</div>
-            <div class="bg-blue-400 row-span-2">프로젝트 대표이미지</div>
+            <div class="bg-blue-400">프로젝트5 기간</div>
+            <div class="bg-blue-400 row-span-2">프로젝트5 대표이미지</div>
             <div class="bg-blue-400" style="height: 90px;">기술스택</div>
         </div>
         
@@ -31,8 +31,8 @@
         </div>
         
         <div class="flex justify-between mb-12">
-            <div class="bg-indigo-400" style="height: 60px; width:100px;">이전페이지</div>
-            <div class="bg-indigo-400" style="height: 60px; width:100px;"><a href="/detail2">다음페이지</a></div>
+            <div class="bg-indigo-400" style="height: 60px; width:100px;"><a href="/detail4">이전페이지</a></div>
+            <div class="bg-indigo-400" style="height: 60px; width:100px;">다음페이지</div>
         </div>
     </div>
 
