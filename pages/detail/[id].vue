@@ -15,8 +15,8 @@
         </div>
         
         <div class="grid grid-cols-2 grid-rows-2 gap-4 mb-12">
-            <div class="bg-blue-400">프로젝트3 기간</div>
-            <div class="bg-blue-400 row-span-2">프로젝트3 대표이미지</div>
+            <div class="bg-blue-400">프로젝트 기간</div>
+            <div class="bg-blue-400 row-span-2">프로젝트 대표이미지</div>
             <div class="bg-blue-400" style="height: 90px;">기술스택</div>
         </div>
         
@@ -30,9 +30,17 @@
             <div class="mb-4 bg-gray-400" style="height: 400px;">서브이미지</div>
         </div>
         
-        <div class="flex justify-between mb-12">
-            <div class="bg-indigo-400" style="height: 60px; width:100px;"><a href="/detail2">이전페이지</a></div>
-            <div class="bg-indigo-400" style="height: 60px; width:100px;"><a href="/detail4">다음페이지</a></div>
+        <div class="flex mb-12" :class="{ 'justify-end': 1 == pageNumber, 'justify-start': 5 == pageNumber, 'justify-between': 1 < pageNumber && 5 > pageNumber }">
+            <div v-if="1 != pageNumber" class="bg-indigo-400" style="height: 60px; width:100px;">
+                <NuxtLink :to="{ path: '/detail/'+(pageNumber - 1) }" >
+                    이전페이지
+                </NuxtLink>
+            </div>
+            <div v-if="5 > pageNumber" class="bg-indigo-400" style="height: 60px; width:100px;">
+                <NuxtLink :to="{ path: '/detail/'+(pageNumber + 1) }" >
+                    다음페이지
+                </NuxtLink>
+            </div>
         </div>
     </div>
 
@@ -42,3 +50,10 @@
         </div>
     </footer>
 </template>
+
+<script setup>
+
+const route = useRoute()
+const pageNumber = parseInt(route.params.id);
+
+</script>

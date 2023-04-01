@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed w-full top-0">
+    <div class="fixed w-full top-0 z-10">
         <div class="lg:container mx-auto">
             <nav class="text-right text-xl mr-1 mt-2">
                 <a href="/">HOME</a>
@@ -32,33 +32,37 @@
         </div>
 
         <div class="grid grid-cols-2 grid-rows-3 gap-4 mb-12">
-            <div>
-                <div class="border-4 border-red-400 mx-10 my-4 h-64">이미지사진</div>
-            </div>
-            <div>
-                <div class="mx-10 my-4">
-                    <h2 class="text-xl font-bold">프로젝트1</h2>
-                    <p><a href="/detail">더보기</a></p>
+
+            <div class="border-4 border-red-400 mx-10 my-4 h-64">이미지사진</div>
+            <div class="flex justify-center mx-10 my-4">
+                <div class="flex flex-col justify-center">
+                    <div>
+                        <h2 class="text-xl font-bold">프로젝트1</h2>
+                        <p><a href="/detail">더보기</a></p>
+                    </div>
                 </div>
             </div>
-            <div>
-                <div class="mx-10 my-4">
-                    <h2 class="text-xl font-bold">프로젝트2</h2>
-                    <p><a href="/detail2">더보기</a></p>
+
+            <div class="flex justify-center mx-10 my-4">
+                <div class="flex flex-col justify-center">
+                    <div>
+                        <h2 class="text-xl font-bold">프로젝트2</h2>
+                        <p><a href="/detail2">더보기</a></p>
+                    </div>
                 </div>
             </div>
-            <div>
-                <div class="border-4 border-red-400 mx-10 my-4 h-64">이미지사진</div>
-            </div>
-            <div>
-                <div class="border-4 border-red-400 mx-10 my-4 h-64">이미지사진</div>
-            </div>
-            <div>
-                <div class="mx-10 my-4">
-                    <h2 class="text-xl font-bold">프로젝트3</h2>
-                    <p><a href="/detail3">더보기</a></p>
+            <div class="border-4 border-red-400 mx-10 my-4 h-64">이미지사진</div>
+            
+            <div class="border-4 border-red-400 mx-10 my-4 h-64">이미지사진</div>
+            <div class="flex justify-center mx-10 my-4">
+                <div class="flex flex-col justify-center">
+                    <div>
+                        <h2 class="text-xl font-bold">프로젝트3</h2>
+                        <p><a href="/detail3">더보기</a></p>
+                    </div>
                 </div>
             </div>
+
         </div>
 
         <div class="grid grid-cols-2 grid-rows-5 gap-4 mb-12">
