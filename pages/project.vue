@@ -9,9 +9,9 @@
         </div>
     </div>
     
-    <div class="lg:container mx-auto px-4 py-2">
+    <div class="lg:container mx-auto px-4 py-12">
         <div v-for="pageNumber in 10">
-            <div class="mb-4 p-8">
+            <div class="mb-4">
             <NuxtLink :to="{ path: '/detail/' + pageNumber }" >
                 <div class="grid grid-cols-2 grid-rows-2 gap-4">
                     <div class="text-5xl italic font-semibold text-gray-400">{{ pageNumber.toString().padStart(2, '0') }}. 프로젝트</div>

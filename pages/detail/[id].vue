@@ -9,7 +9,7 @@
         </div>
     </div>
     
-    <div class="lg:container mx-auto px-4 py-2">
+    <div class="lg:container mx-auto px-4 py-12">
         <div class="mb-12">
             <p class="pb-4 text-6xl text-gray-200">{{ pageNumber.toString().padStart(2, '0') }}.</p>
             <p class="pb-2 text-3xl text-gray-500">프로젝트 {{ pageNumber }}</p>
