@@ -18,7 +18,7 @@
             </div>
             <div class=""></div>
             <div class="relative">
-                <div class="absolute px-5 py-5 w-96 right-0 mx-10 my-10 rounded-md shadow-lg shadow-gray-500/50 bg-gray-100">
+                <div class="absolute px-5 py-5 w-96 right-0 mx-10 my-10 rounded-md shadow-lg shadow-gray-500/50 bg-gray-100 opacity-70">
                     <div class="grid grid-cols-2 grid-row-3 gap-4">
                         <div class="text-center text-sm">안성시</div>
                         <div class="bg-contain bg-no-repeat bg-center row-span-2" style="background-image: url(images/cloud.png)"></div>
@@ -30,10 +30,10 @@
         </div>
 
         <div class="mb-12">
-            <div v-for="(pageNumber, index) in 3">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-cover bg-center h-80 mx-10 my-4 shadow-lg shadow-gray-500/50" style="background-image: url(images/project.jpg)"></div>
-                    <div class="flex justify-center mx-10 my-4">
+            <div v-for="(pageNumber, index) in 3" >
+                <div class="flex flex-row" :class="{'flex flex-row-reverse' : 1 == index}">
+                    <div class="basis-1/2 bg-cover bg-center h-80 mx-10 my-4 shadow-lg shadow-gray-500/50" style="background-image: url(images/project.jpg)"></div>
+                    <div class="basis-1/2 flex justify-center mx-10 my-4">
                         <div class="flex flex-col justify-center">
                             <div>
                                 <h2 class="text-2xl font-bold text-gray-400 mb-4">프로젝트{{ pageNumber }}</h2>

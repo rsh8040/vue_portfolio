@@ -11,10 +11,10 @@
     
     <div class="lg:container mx-auto px-4 py-2">
         <div v-for="pageNumber in 10">
-            <div class="mb-4 p-4">
+            <div class="mb-4 p-8">
             <NuxtLink :to="{ path: '/detail/' + pageNumber }" >
                 <div class="grid grid-cols-2 grid-rows-2 gap-4">
-                    <div class="text-5xl italic font-semibold text-gray-400">{{ pageNumber }}. 프로젝트</div>
+                    <div class="text-5xl italic font-semibold text-gray-400">{{ pageNumber.toString().padStart(2, '0') }}. 프로젝트</div>
                     <div class="row-span-2 bg-cover bg-center h-80 shadow-lg shadow-gray-500/50" style="background-image: url(images/project.jpg)"></div>
                     <div class="text-xl text-gray-500">
                         <p>nodeJS</p>

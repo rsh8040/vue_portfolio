@@ -9,5 +9,12 @@ export default defineNuxtConfig({
             tailwindcss: {},
             autoprefixer: {},
         }
+    },
+    app: {
+        head: {
+            bodyAttrs: {
+                class: 'overflow-y-scroll'
+            }
+        }
     }
 })

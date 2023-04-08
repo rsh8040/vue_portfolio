@@ -11,7 +11,7 @@
     
     <div class="lg:container mx-auto px-4 py-2">
         <div class="mb-12">
-            <p class="pb-4 text-6xl text-gray-200">0{{ pageNumber }}.</p>
+            <p class="pb-4 text-6xl text-gray-200">{{ pageNumber.toString().padStart(2, '0') }}.</p>
             <p class="pb-2 text-3xl text-gray-500">프로젝트 {{ pageNumber }}</p>
             <div class="pb-2 text-gray-500">사내 프로젝트</div>
         </div>
@@ -27,19 +27,18 @@
             <div class="bg-cover bg-center h-96 shadow-lg shadow-gray-500/50" style="background-image: url(/images/project.jpg)"></div>
         </div>
         
-        <div class="mb-12">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-</div>
+        <div class="mb-12">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
         
         <div class="mb-12">
-            <div class="bg-cover bg-center h-96 shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
-            <div class="bg-cover bg-center h-96 shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
-            <div class="bg-cover bg-center h-96 shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
-            <div class="bg-cover bg-center h-96 shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
-            <div class="bg-cover bg-center h-96 shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
-            <div class="bg-cover bg-center h-96 shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
+            <div class="bg-cover bg-center h-screen shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
+            <div class="bg-cover bg-center h-screen shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
+            <div class="bg-cover bg-center h-screen shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
+            <div class="bg-cover bg-center h-screen shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
+            <div class="bg-cover bg-center h-screen shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
+            <div class="bg-cover bg-center h-screen shadow-lg shadow-gray-500/50 mb-4" style="background-image: url(/images/project.jpg)"></div>
         </div>
         
-        <div class="flex mb-12" :class="{ 'justify-end': 1 == pageNumber, 'justify-start': 5 == pageNumber, 'justify-between': 1 < pageNumber && 5 > pageNumber }">
+        <div class="flex mb-12" :class="{ 'justify-end': 1 == pageNumber, 'justify-start': 10 == pageNumber, 'justify-between': 1 < pageNumber && 10 > pageNumber }">
             <div v-if="1 != pageNumber">
                 <NuxtLink :to="{ path: '/detail/'+(pageNumber - 1) }" >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="gray" stroke-width="1">
@@ -47,7 +46,7 @@
                     </svg>
                 </NuxtLink>
             </div>
-            <div v-if="5 > pageNumber">
+            <div v-if="10 > pageNumber">
                 <NuxtLink :to="{ path: '/detail/'+(pageNumber + 1) }" >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="gray" stroke-width="1">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
