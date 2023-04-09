@@ -16,17 +16,19 @@
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
             </div>
-            <div class=""></div>
             <div class="relative">
-                <div class="absolute px-5 py-5 w-96 right-0 mx-10 my-10 rounded-md shadow-lg shadow-gray-500/50 bg-gray-100 opacity-70">
-                    <div class="grid grid-cols-2 grid-row-3 gap-4">
-                        <div class="text-center text-sm">안성시</div>
-                        <div class="bg-contain bg-no-repeat bg-center row-span-2" style="background-image: url(images/cloud.png)"></div>
-                        <div class="text-center text-5xl">15℃</div>
-                        <div class="col-span-2 text-center">어디서든 개발하기 좋은날</div>
+                <div class="absolute px-3 py-3 right-0 rounded-md shadow-lg shadow-gray-500/50 bg-gray-100 opacity-70">
+                    <div class="grid grid-cols-2 grid-row-2 gap-2">
+                        <div class="text-center">안성시</div>
+                        <div class="text-center">대기질</div>
+                        <div class="text-center text-3xl">15℃</div>
+                        <div class="flex justify-center items-center">
+                            <div class="w-4 h-4 bg-green-700 border border-green-700 rounded-full"></div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class=""></div>
         </div>
 
         <div class="mb-12">
@@ -77,13 +79,13 @@
     
     <footer>
         <div class="lg:container mx-auto block text-center">
-            <div class="flex justify-center">
+            <!-- <div class="flex justify-center">
                 <div class="w-10 h-10">
                     <a href="https://github.com/rsh8040">
                         <img src="images/git-hub.png" alt="github" />
                     </a>
                 </div>
-            </div>
+            </div> -->
             <div>© 2023. Elly. All rights reserved.</div>
         </div>
     </footer>
