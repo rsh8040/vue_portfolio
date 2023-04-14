@@ -55,7 +55,7 @@
             <div>
                 <label for="name" class="block text-sm font-medium leading-6 text-gray-900">YOUR NAME</label>
                 <div class="mt-2">
-                    <input type="text" name="name" id="name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder=" you">
+                    <input type="text" name="name" id="name" v-model="name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder=" you">
                 </div>
             </div>
             <div class="row-span-3 text-center">
@@ -64,16 +64,16 @@
             <div>
                 <label for="email" class="block text-sm font-medium leading-6 text-gray-900">YOUR EMAIL</label>
                 <div class="mt-2">
-                    <input type="email" name="email" id="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder=" you@example.com">
+                    <input type="email" name="email" id="email" v-model="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder=" you@example.com">
                 </div>
             </div>
             <div>
                 <label for="message" class="block text-sm font-medium leading-6 text-gray-900">YOUR MESSAGE</label>
                 <div class="mt-2">
-                    <input type="text" name="message" id="message" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder=" text your message">
+                    <input type="text" name="message" id="message" v-model="message" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder=" text your message">
                 </div>
             </div>
-            <button class="text-right">SEND MESSAGE</button>
+            <button @click="send()" class="text-right">SEND MESSAGE</button>
         </div>
     </div>
     
@@ -90,3 +90,22 @@
         </div>
     </footer>
 </template>
+
+<script setup>
+import axios from 'axios'
+
+const name = ref('')
+const email = ref('')
+const message = ref('')
+
+async function send() {
+    axios
+    .post('https://prod-30.koreacentral.logic.azure.com:443/workflows/5dae9090695a4e5988d538d33478f417/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=oTDJi5_Z7WhB1nS-K2Vm4CLQYbO-Hmq9FJbDqqaXqmU', 
+    {
+        name: name.value,
+        email: email.value,
+        content: message.value
+    })
+    .then((response) => console.log(response))
+}
+</script>
