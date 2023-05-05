@@ -19,11 +19,14 @@
             <div class="relative">
                 <div class="absolute px-3 py-3 right-0 rounded-md shadow-lg shadow-gray-500/50 bg-gray-100 opacity-70">
                     <div class="grid grid-cols-2 grid-row-2 gap-2">
-                        <div class="text-center">안성시</div>
+                        <div class="text-center">{{sigungu}}</div>
                         <div class="text-center">대기질</div>
-                        <div class="text-center text-3xl">15℃</div>
+                        <div class="text-center text-3xl">{{temperature}}℃</div>
                         <div class="flex justify-center items-center">
-                            <div class="w-4 h-4 bg-green-700 border border-green-700 rounded-full"></div>
+                            <div v-if="fineDustGrade == '좋음'" class="w-4 h-4 bg-blue-700 border border-blue-700 rounded-full"></div>
+                            <div v-if="fineDustGrade == '보통'" class="w-4 h-4 bg-green-700 border border-green-700 rounded-full"></div>
+                            <div v-if="fineDustGrade == '나쁨'" class="w-4 h-4 bg-red-700 border border-red-700 rounded-full"></div>
+                            <div v-if="fineDustGrade == '' || fineDustGrade == null">{{ fineDustErrorMessage }}</div>
                         </div>
                     </div>
                 </div>
@@ -151,11 +154,10 @@
       </div>
     </Dialog>
   </TransitionRoot>
-  
+
 </template>
 
 <script setup>
-import axios from 'axios'
 import { ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { CheckIcon } from '@heroicons/vue/24/outline'
@@ -168,6 +170,17 @@ const message = ref('')
 const sendMailModalOpen = ref(false)
 const sendMailModalFailOpen = ref(false)
 const errorMessage = ref('')
+
+const temperature = ref('')
+const sigungu = ref('')
+const findDustCity = ref('')
+
+const fineDustErrorMessage = ref('')
+const fineDustGrade = ref('')
+
+onMounted(() => {
+  myLocation()
+})
 
 async function send() {
 
@@ -187,16 +200,200 @@ async function send() {
         return false
     }
 
-    axios
-    .post('https://prod-30.koreacentral.logic.azure.com:443/workflows/5dae9090695a4e5988d538d33478f417/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=oTDJi5_Z7WhB1nS-K2Vm4CLQYbO-Hmq9FJbDqqaXqmU', 
-    {
-        name: name.value,
-        email: email.value,
-        content: message.value
+    await useFetch('', {
+      method: "POST",
+      body: {
+        'name': name.value,
+        'email': email.value,
+        'content': message.value
+      }
     })
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error.response))
-    
     sendMailModalOpen.value = true
+    
 }
+
+const setGeolocation = () => {}
+  
+async function myLocation() {
+  let lat, long;
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+        lat = position.coords.latitude,
+        long = position.coords.longitude,
+        setGeolocation((geolocation) => {
+          return {
+            geolocation,
+            lat,
+            long,
+          }
+        })
+        xyConverter('toXY',lat,long)
+        coordinateData(lat,long)
+      },
+      function (error) {
+        console.error(error);
+      })
+    }
+  }
+
+    // LCC DFS 좌표변환을 위한 기초 자료
+    //
+    const RE = 6371.00877 // 지구 반경(km)
+    const GRID = 5.0 // 격자 간격(km)
+    const SLAT1 = 30.0 // 투영 위도1(degree)
+    const SLAT2 = 60.0 // 투영 위도2(degree)
+    const OLON = 126.0 // 기준점 경도(degree)
+    const OLAT = 38.0 // 기준점 위도(degree)
+    const XO = 43 // 기준점 X좌표(GRID)
+    const YO = 136 // 기1준점 Y좌표(GRID)
+    //
+    // LCC DFS 좌표변환 ( code : "toXY"(위경도->좌표, v1:위도, v2:경도), "toLL"(좌표->위경도,v1:x, v2:y) )
+    //
+
+  function xyConverter(code, v1, v2) {
+    const DEGRAD = Math.PI / 180.0
+    const RADDEG = 180.0 / Math.PI
+
+    const re = RE / GRID
+    const slat1 = SLAT1 * DEGRAD
+    const slat2 = SLAT2 * DEGRAD
+    const olon = OLON * DEGRAD
+    const olat = OLAT * DEGRAD
+
+      var sn = Math.tan(Math.PI * 0.25 + slat2 * 0.5) / Math.tan(Math.PI * 0.25 + slat1 * 0.5)
+      sn = Math.log(Math.cos(slat1) / Math.cos(slat2)) / Math.log(sn)
+      var sf = Math.tan(Math.PI * 0.25 + slat1 * 0.5)
+      sf = Math.pow(sf, sn) * Math.cos(slat1) / sn
+      var ro = Math.tan(Math.PI * 0.25 + olat * 0.5)
+      ro = re * sf / Math.pow(ro, sn)
+      var rs = {}
+      if (code == "toXY") {
+          rs['lat'] = v1
+          rs['lng'] = v2
+          var ra = Math.tan(Math.PI * 0.25 + (v1) * DEGRAD * 0.5)
+          ra = re * sf / Math.pow(ra, sn)
+          var theta = v2 * DEGRAD - olon
+          if (theta > Math.PI) theta -= 2.0 * Math.PI
+          if (theta < -Math.PI) theta += 2.0 * Math.PI
+          theta *= sn
+          rs['x'] = Math.floor(ra * Math.sin(theta) + XO + 0.5)
+          rs['y'] = Math.floor(ro - ra * Math.cos(theta) + YO + 0.5)
+      }
+      else {
+          rs['x'] = v1
+          rs['y'] = v2
+          var xn = v1 - XO
+          var yn = ro - v2 + YO
+          ra = Math.sqrt(xn * xn + yn * yn)
+          if (sn < 0.0) - ra
+          var alat = Math.pow((re * sf / ra), (1.0 / sn))
+          alat = 2.0 * Math.atan(alat) - Math.PI * 0.5
+
+          if (Math.abs(xn) <= 0.0) {
+              theta = 0.0
+          }
+          else {
+              if (Math.abs(yn) <= 0.0) {
+                  theta = Math.PI * 0.5
+                  if (xn < 0.0) - theta
+              }
+              else theta = Math.atan2(xn, yn)
+          }
+          var alon = theta / sn + olon
+          rs['lat'] = alat * RADDEG
+          rs['lng'] = alon * RADDEG
+      }
+      temperaturesData(rs.x,rs.y)
+  }
+
+  async function temperaturesData(x,y) {
+
+    const now = new Date()
+    const year = (now.getFullYear()).toString() // 년도
+    const month = (now.getMonth() + 1).toString().padStart(2, '0')  // 월
+    const date = (now.getDate()).toString().padStart(2, '0') // 일
+    const hours = (now.getHours()-1).toString().padStart(2, '0') // 시간
+    const minutes = now.getMinutes() // 분
+    const yesterday = (new Date(now.setDate(now.getDate() -1)).toISOString().split('T')[0]).toString().padStart(2, '0') // 어제일자
+    let halfHourOrOnTime
+
+    if(parseInt(minutes/30) == 1) {
+      halfHourOrOnTime = '30'
+    }
+    
+    if(parseInt(minutes/30) == 0) {
+      halfHourOrOnTime = '00'
+    }
+
+    const { data } = await useFetch('http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=TNAnRP7WiL4Eh5Cl3ky3/i550iw24fmyTTi9UzP6uTnhPAan/hRVD1pCwaIxAQ1PY7ZhvUpVJ8L0p8hXBkqt8w==&numOfRows=10&pageNo=1&base_date='+year+month+date+'&base_time='+hours+halfHourOrOnTime+'&nx='+x+'&ny='+y+'&dataType=JSON')
+    const temperatureArray = data._rawValue.response.body.items.item
+   
+    temperatureArray.forEach(index => {
+      if(index.category == 'T1H') {
+        temperature.value = parseInt(index.obsrValue)
+      }
+    })
+
+    fineDustData(yesterday)
+
+  }
+
+  async function coordinateData(lat, long) {
+
+    const { data } = await useFetch('https://dapi.kakao.com/v2/local/geo/coord2address.json?x='+long+'&y='+lat+'&input_coord=WGS84', {
+      headers: {
+        'Authorization': 'KakaoAK ded0f248016c66efcf99109a241e74cc'
+      }
+    })
+
+    const sig = data._rawValue.documents[0].address.region_2depth_name
+    const ctp = data._rawValue.documents[0].address.region_1depth_name
+    sigungu.value = sig
+    findDustCity.value = ctp
+  }
+
+  async function fineDustData(yesterday) {
+
+    const { data } = await useFetch('http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth?searchDate='+yesterday+'&returnType=JSON&serviceKey=TNAnRP7WiL4Eh5Cl3ky3/i550iw24fmyTTi9UzP6uTnhPAan/hRVD1pCwaIxAQ1PY7ZhvUpVJ8L0p8hXBkqt8w==&numOfRows=100&pageNo=1')
+    const str = data._rawValue.response.body.items[0].informGrade
+    let strDataArray = str.split(/[ ,:]/)
+    let strTrimArray = strDataArray.filter((element) => {
+      return element !== undefined && element !== null && element !== '';
+    })
+
+    let fineDustDataMap = new Map()
+    let ctpName
+    let grade
+    
+    strTrimArray.forEach((name, index) => {
+      if(index % 2 == 0) {
+        if(name == "경기남부") {
+          name = "경기"
+        }
+        ctpName = name
+      }
+      if(index % 2 == 1) {
+        grade = name
+      }
+      fineDustDataMap.set(ctpName, grade)
+    })
+    
+    let city = findDustCity.value
+    
+    fineDustDataMap.forEach((value, key) => {
+      if(key == "경기북부") {
+        fineDustDataMap.delete("경기북부")
+      }
+      if(key != city || city == null || city == "") {
+        fineDustErrorMessage.value = "측정불가"
+      }
+      if(key == city) {
+        fineDustGrade.value = value
+        return value
+      }
+    })
+
+  }
+
 </script>

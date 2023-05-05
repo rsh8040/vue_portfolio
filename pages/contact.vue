@@ -136,7 +136,6 @@
 </template>
 
 <script setup>
-import axios from 'axios'
 import { ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { CheckIcon } from '@heroicons/vue/24/outline'
@@ -168,16 +167,14 @@ async function send() {
         return false
     }
 
-    axios
-    .post('https://prod-30.koreacentral.logic.azure.com:443/workflows/5dae9090695a4e5988d538d33478f417/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=oTDJi5_Z7WhB1nS-K2Vm4CLQYbO-Hmq9FJbDqqaXqmU', 
-    {
-        name: name.value,
-        email: email.value,
-        content: message.value
+    await useFetch('', {
+      method: "POST",
+      body: {
+        'name': name.value,
+        'email': email.value,
+        'content': message.value
+      }
     })
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error.response))
-    
     sendMailModalOpen.value = true
 }
 </script>
