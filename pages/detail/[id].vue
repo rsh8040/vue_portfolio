@@ -64,13 +64,6 @@
 
     <footer>
         <div class="lg:container mx-auto block text-center">
-            <!-- <div class="flex justify-center">
-                <div class="w-10 h-10">
-                    <a href="https://github.com/rsh8040">
-                        <img src="/images/git-hub.png" alt="github" />
-                    </a>
-                </div>
-            </div> -->
             <div>© 2023. Elly. All rights reserved.</div>
         </div>
     </footer>
