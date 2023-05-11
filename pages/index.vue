@@ -156,6 +156,8 @@ import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } fro
 import { CheckIcon } from '@heroicons/vue/24/outline'
 import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
 import { toKmaCoord } from '../util/kma'
+import { temperatureDateApi, fineDustDataApi } from '../util/data_portal_api'
+import { kakaoCoordinateDataApi } from '../util/kakao_api'
 
 const name = ref('')
 const email = ref('')
@@ -250,7 +252,7 @@ async function temperaturesData(x,y) {
         halfHourOrOnTime = '00'
     }
 
-    const { data } = await useFetch('http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=TNAnRP7WiL4Eh5Cl3ky3/i550iw24fmyTTi9UzP6uTnhPAan/hRVD1pCwaIxAQ1PY7ZhvUpVJ8L0p8hXBkqt8w==&numOfRows=10&pageNo=1&base_date='+year+month+date+'&base_time='+hours+halfHourOrOnTime+'&nx='+x+'&ny='+y+'&dataType=JSON')
+    const { data } = await temperatureDateApi(x, y, year, month, date, hours, halfHourOrOnTime)
 
     let temperatureArray = data._rawValue.response.body.items.item
 
@@ -264,11 +266,7 @@ async function temperaturesData(x,y) {
 }
 
 async function coordinateData(lat, long) {
-    const { data } = await useFetch('https://dapi.kakao.com/v2/local/geo/coord2address.json?x='+long+'&y='+lat+'&input_coord=WGS84', {
-        headers: {
-            'Authorization': 'KakaoAK ded0f248016c66efcf99109a241e74cc'
-        }
-    })
+    const { data } = await kakaoCoordinateDataApi(lat, long)
 
     let sig = data._rawValue.documents[0].address.region_2depth_name
     let ctp = data._rawValue.documents[0].address.region_1depth_name
@@ -278,7 +276,7 @@ async function coordinateData(lat, long) {
 }
 
 async function fineDustData(yesterday) {
-    const { data } = await useFetch('http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth?searchDate='+yesterday+'&returnType=JSON&serviceKey=TNAnRP7WiL4Eh5Cl3ky3/i550iw24fmyTTi9UzP6uTnhPAan/hRVD1pCwaIxAQ1PY7ZhvUpVJ8L0p8hXBkqt8w==&numOfRows=100&pageNo=1')
+    const { data } = await fineDustDataApi(yesterday)
     
     let str = data._rawValue.response.body.items[0].informGrade
     let strDataArray = str.split(/[ ,:]/)
